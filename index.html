@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Canvas</title>
+	<link rel="stylesheet" href="/fonts/fontawesome.css" />
+	<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<main>
+	<canvas width="1680" height="1050"></canvas>
+</main>
+
+<input type="checkbox" id="toggle" />
+<label for="toggle" title="Drawing tools" class="toggle">
+	<i class="fa fa-pencil"></i>
+</label>
+
+<form>
+	<label for="toggle" title="Close drawing tools" class="toggle">
+		<i class="fa fa-times"></i>
+	</label>
+
+	<menu id="size">
+		<input type="range" min="1" max="26" step="5" value="5" />
+	</menu>
+
+	<menu id="palette">
+		<li>
+			<input type="radio" name="col" id="col_blue" value="blue" checked />
+			<label for="col_blue"><i></i></label>
+		</li>
+		<li>
+			<input type="radio" name="col" id="col_red" value="red" />
+			<label for="col_red"><i></i></label>
+		</li>
+		<li>
+			<input type="radio" name="col" id="col_green" value="green" />
+			<label for="col_green"><i></i></label>
+		</li>
+		<li>
+			<input type="radio" name="col" id="col_yellow" value="yellow" />
+			<label for="col_yellow"><i></i></label>
+		</li>
+		<li>
+			<input type="radio" name="col" id="col_white" value="white" />
+			<label for="col_white"><i></i></label>
+		</li>
+		<li>
+			<input type="radio" name="col" id="col_black" value="black" />
+			<label for="col_black"><i></i></label>
+		</li>
+	</menu>
+</form>
+<script src="/script.js"></script>
+</body>
+</html>

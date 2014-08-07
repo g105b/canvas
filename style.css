@@ -1,0 +1,138 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+html, body {
+	height: 100%;
+	overflow: hidden;
+}
+body {
+	background: #efefef;
+	-webkit-user-select: none;
+	user-select: none;
+	text-align: center;
+}
+main {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+}
+canvas {
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	left: -840px;
+	top: -525px;
+	width: 1680px;
+	height: 1050px;
+	outline: 1px solid rgba(0,0,0,0.1);
+	background: white;
+	cursor: crosshair;
+}
+
+main:active ~ label {
+	display: none;
+}
+
+label.toggle {
+	position: fixed;
+	top: 0;
+	right: 0;
+	padding: 16px;
+	z-index: 1;
+}
+label.toggle > i {
+	display: block;
+	width: 48px;
+	height: 48px;
+	font-size: 24px;
+	border-radius: 32px;
+	color: rgba(0,0,0,0.2);
+	text-align: center;
+}
+label.toggle > i::before {
+	line-height: 48px;
+}
+label.toggle:hover > i {
+	background: white;
+	color: rgba(0,0,0,0.8);
+	box-shadow: 0 0 16px rgba(0,0,0,0.2);
+}
+label.toggle:active > i {
+	background: #ddd;
+}
+
+#toggle {
+	display: none;
+}
+form {
+	display: none;
+	position: fixed;
+	top: 0;
+	right: 0;
+	background: #fff;
+	z-index: 2;
+}
+form label.toggle i {
+	color: rgba(0,0,0,0.8);
+	box-shadow: 0 0 16px rgba(0,0,0,0.2);
+}
+#toggle:checked ~ form {
+	display: block;
+}
+
+#size {
+	margin-top: 32px;
+	margin-right: 64px;
+}
+#palette {
+	margin-top: 32px;
+	width: 256px;
+}
+#palette > li {
+	display: inline-block;
+}
+
+#palette input {
+	display: none;
+}
+#palette label {
+	display: block;
+	padding: 16px;
+	opacity: 0.25;
+}
+#palette label i {
+	display: block;
+	width: 32px;
+	height: 32px;
+	border-radius: 64px;
+	border: 1px double black;
+}
+#palette label:hover {
+	opacity: 0.5;
+}
+#palette label:active {
+	-webkit-transform: scale(0.9);
+	transform: scale(0.9);
+}
+#palette input:checked ~ label {
+	opacity: 1;
+}
+#palette input[value='blue'] ~ label i {
+	background: blue;
+}
+#palette input[value='red'] ~ label i {
+	background: red;
+}
+#palette input[value='green'] ~ label i {
+	background: green;
+}
+#palette input[value='yellow'] ~ label i {
+	background: yellow;
+}
+#palette input[value='white'] ~ label i {
+	background: white;
+}
+#palette input[value='black'] ~ label i {
+	background: black;
+}
