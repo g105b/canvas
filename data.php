@@ -8,15 +8,12 @@ $db = new PDO(
 );
 $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
-switch($_SERVER["REQUEST_METHOD"]) {
-case "GET":
+if(empty($_POST)) {
 	$when = null;
 
 	if(isset($_GET["when"])
 	&& $_GET["when"] > 0) {
-		$dt = new DateTime();
-		$dt->setTimestamp($_GET["when"]);
-		$when = $dt->format("Y-m-d H:i:s");
+		$when = $_GET["when"];
 	}
 
 	$time = 0;
@@ -48,9 +45,8 @@ case "GET":
 	}
 
 	die(json_encode($pathArray));
-	break;
-
-case "POST":
+}
+else {
 	$sql = file_get_contents("db/putPath.sql");
 	$stmt = $db->prepare($sql);
 	$stmt->bindParam(":col", $_POST["col"]);
@@ -68,11 +64,6 @@ case "POST":
 		$stmt->bindParam(":ID_Path", $pathID);
 		$stmt->execute();
 	}
-
-	break;
-
-default:
-	break;
 }
 
 die("OK");

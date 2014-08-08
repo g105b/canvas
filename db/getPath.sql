@@ -11,7 +11,7 @@ where
 (
 	:when is null
 	or
-	dateTime > :when
+	unix_timestamp(dateTime) > :when
 )
 
 order by
