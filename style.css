@@ -7,7 +7,7 @@ html, body {
 	overflow: hidden;
 }
 body {
-	background: #efefef;
+	background: #fff;
 	-webkit-user-select: none;
 	user-select: none;
 	text-align: center;
@@ -18,19 +18,18 @@ main {
 	top: 50%;
 }
 canvas {
-	position: relative;
-	display: none;
+	position: absolute;
+	z-index: 1;
 	margin: 0 auto;
 	left: -840px;
 	top: -525px;
 	width: 1680px;
 	height: 1050px;
 	outline: 1px solid rgba(0,0,0,0.1);
-	background: white;
 	cursor: crosshair;
 }
-canvas.loaded {
-	display: block;
+#output {
+	z-index: 0;
 }
 
 main:active ~ label {
@@ -42,7 +41,7 @@ label.toggle {
 	top: 0;
 	right: 0;
 	padding: 16px;
-	z-index: 1;
+	z-index: 2;
 }
 label.toggle > i {
 	display: block;
@@ -74,7 +73,7 @@ form {
 	top: 0;
 	right: 0;
 	background: #fff;
-	z-index: 2;
+	z-index: 3;
 	box-shadow: 0 0 16px rgba(0,0,0,0.2);
 }
 form label.toggle i {

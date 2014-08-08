@@ -4,6 +4,8 @@ var
 	form = document.forms[0],
 	canvas = document.querySelector("canvas#input"),
 	ctx = canvas.getContext("2d"),
+	output = document.querySelector("canvas#output"),
+	ctxOut = output.getContext("2d"),
 	clicked = false,
 	size = document.querySelector("#size input"),
 	toggle = document.querySelector("#toggle"),
@@ -21,8 +23,6 @@ function post(what, cb) {
 
 function draw(pathList) {
 	var
-		lineWidth = ctx.lineWidth,
-		strokeStyle = ctx.strokeStyle,
 		i_path,
 		len_path,
 		i_point,
@@ -35,22 +35,19 @@ function draw(pathList) {
 		path = pathList[i_path];
 		latestDt = +new Date(path.dateTime) / 1000;
 
-		ctx.lineWidth = path.size;
-		ctx.strokeStyle = path.col;
+		ctxOut.lineWidth = path.size;
+		ctxOut.strokeStyle = path.col;
 
 		if(path.points[0]) {
-			ctx.moveTo(path.points[0].x, path.points[0].y);
-			ctx.beginPath();
+			ctxOut.moveTo(path.points[0].x, path.points[0].y);
+			ctxOut.beginPath();
 		}
 
 		for(i = 1, len = path.points.length; i < len; i++) {
-			ctx.lineTo(path.points[i].x, path.points[i].y);
-			ctx.stroke();
+			ctxOut.lineTo(path.points[i].x, path.points[i].y);
+			ctxOut.stroke();
 		}
 	}
-
-	ctx.lineWidth = lineWidth;
-	ctx.strokeStyle = strokeStyle;
 }
 
 function x(method, data, cb) {
@@ -110,6 +107,7 @@ function x(method, data, cb) {
 
 function start(e) {
 	clicked = true;
+	ctx.beginPath();
 	ctx.moveTo(e.offsetX, e.offsetY);
 	path = {
 		start: {
@@ -121,7 +119,6 @@ function start(e) {
 		points: [],
 	};
 
-	ctx.beginPath();
 	toggle.checked = false;
 }
 
@@ -163,9 +160,7 @@ function changeStyle(s, c) {
 }
 
 function update() {
-	canvas.classList.add("loaded");
 	draw(JSON.parse(this.responseText));
-
 	get({when: latestDt}, update);
 };
 
