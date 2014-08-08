@@ -33,8 +33,7 @@ function draw(pathList) {
 
 	for(i_path = 0, len_path = pathList.length; i_path < len_path; i_path++) {
 		path = pathList[i_path];
-		latestDt = +new Date(path.dateTime);
-		console.log(latestDt);
+		latestDt = +new Date(path.dateTime) / 1000;
 
 		ctx.lineWidth = path.size;
 		ctx.strokeStyle = path.col;

@@ -18,17 +18,24 @@ case "GET":
 		$when = $dt->format("Y-m-d H:i:s");
 	}
 
+	$time = 0;
+	$timeInc = 5;
+	$timeLimit = 600; // 10 minutes
+	set_time_limit($timeLimit + 1);
 	$pathArray = [];
-	do {
+
+	while(empty($pathArray) && $time < $timeLimit) {
 		$sql = file_get_contents("db/getPath.sql");
 		$stmt = $db->prepare($sql);
 		$stmt->bindParam(":when", $when);
 		$stmt->execute();
 		$pathArray = $path = $stmt->fetchAll();
+
 		if(empty($pathArray)) {
-			sleep(5);
+			$time += $timeInc;
+			sleep($timeInc);
 		}
-	} while(empty($pathArray));
+	}
 
 	$sql = file_get_contents("db/getPoint.sql");
 	foreach ($pathArray as $i => $path) {
