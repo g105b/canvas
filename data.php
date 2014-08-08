@@ -1,5 +1,6 @@
 <?php
 chdir(__DIR__);
+date_default_timezone_set("UTC");
 $db = new PDO(
 	"mysql:dbname=canvas;host=127.0.0.1;port=3306;charset=utf8",
 	"canvas",
