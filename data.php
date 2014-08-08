@@ -9,12 +9,28 @@ $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
 
 switch($_SERVER["REQUEST_METHOD"]) {
 case "GET":
-	$sql = file_get_contents("db/getPath.sql");
-	$stmt = $db->prepare($sql);
-	$stmt->execute();
+	$when = null;
+
+	if(isset($_GET["when"])
+	&& $_GET["when"] > 0) {
+		$dt = new DateTime();
+		$dt->setTimestamp($_GET["when"]);
+		$when = $dt->format("Y-m-d H:i:s");
+	}
+
+	$pathArray = [];
+	do {
+		$sql = file_get_contents("db/getPath.sql");
+		$stmt = $db->prepare($sql);
+		$stmt->bindParam(":when", $when);
+		$stmt->execute();
+		$pathArray = $path = $stmt->fetchAll();
+		if(empty($pathArray)) {
+			sleep(5);
+		}
+	} while(empty($pathArray));
 
 	$sql = file_get_contents("db/getPoint.sql");
-	$pathArray = $path = $stmt->fetchAll();
 	foreach ($pathArray as $i => $path) {
 		$stmt = $db->prepare($sql);
 		$stmt->bindParam(":ID_Path", $path->ID);

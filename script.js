@@ -8,14 +8,11 @@ var
 	size = document.querySelector("#size input"),
 	toggle = document.querySelector("#toggle"),
 	path = {},
+	latestDt = -1,
 $;
 
 function get(when, cb) {
-	var
-		when = when || -1,
-	$;
-
-	x("get", {when: when}, cb);
+	x("get", {when: latestDt}, cb);
 }
 
 function post(what, cb) {
@@ -36,6 +33,8 @@ function draw(pathList) {
 
 	for(i_path = 0, len_path = pathList.length; i_path < len_path; i_path++) {
 		path = pathList[i_path];
+		latestDt = +new Date(path.dateTime);
+		console.log(latestDt);
 
 		ctx.lineWidth = path.size;
 		ctx.strokeStyle = path.col;
@@ -161,6 +160,13 @@ function changeStyle(s, c) {
 	ctx.strokeStyle = c;
 }
 
+function update() {
+	canvas.classList.add("loaded");
+	draw(JSON.parse(this.responseText));
+
+	get({when: latestDt}, update);
+};
+
 ctx.lineWidth = 5;
 ctx.strokeStyle = "#00F";
 ctx.lineCap = ctx.lineJoin = "round";
@@ -168,9 +174,6 @@ ctx.lineCap = ctx.lineJoin = "round";
 canvas.addEventListener("mousemove", move);
 form.addEventListener("change", change);
 
-get(null, function() {
-	canvas.classList.add("loaded");
-	draw(JSON.parse(this.responseText));
-});
+get(null, update);
 
 })();//#
