@@ -22,7 +22,7 @@ case "GET":
 	$timeInc = 1;
 	$timeLimit = 600; // 10 minutes
 	set_time_limit($timeLimit + 1);
-	$pathArray = [];
+	$pathArray = array();
 
 	while(empty($pathArray) && $time < $timeLimit) {
 		$sql = file_get_contents("db/getPath.sql");
