@@ -88,6 +88,7 @@ function x(method, data, cb) {
 
 			fd.append("col", data[prop].col);
 			fd.append("size", data[prop].size);
+			fd.append("timestamp", ~~(+new Date / 1000));
 
 			for(i = 0, len = data[prop].points.length; i < len; i++) {
 				fd.append("pos[]",

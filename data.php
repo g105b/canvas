@@ -47,6 +47,10 @@ if(empty($_POST)) {
 	die(json_encode($pathArray));
 }
 else {
+	// Only trust the given timestamp if it is far different from server's.
+	if(abs($_POST["timestamp"] - time()) > 10) {
+		$_POST["timestamp"] = time();
+	}
 	$sql = file_get_contents("db/putPath.sql");
 	$stmt = $db->prepare($sql);
 	$stmt->bindParam(":col", $_POST["col"]);
