@@ -37,8 +37,11 @@ function draw(pathList) {
 
 		ctx.lineWidth = path.size;
 		ctx.strokeStyle = path.col;
-		ctx.moveTo(path.points[0].x, path.points[0].y);
-		ctx.beginPath();
+
+		if(path.points[0]) {
+			ctx.moveTo(path.points[0].x, path.points[0].y);
+			ctx.beginPath();
+		}
 
 		for(i = 1, len = path.points.length; i < len; i++) {
 			ctx.lineTo(path.points[i].x, path.points[i].y);
