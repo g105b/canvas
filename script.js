@@ -2,7 +2,7 @@
 
 var
 	form = document.forms[0],
-	canvas = document.querySelector("canvas"),
+	canvas = document.querySelector("canvas#input"),
 	ctx = canvas.getContext("2d"),
 	clicked = false,
 	size = document.querySelector("#size input"),

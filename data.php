@@ -19,7 +19,7 @@ case "GET":
 	}
 
 	$time = 0;
-	$timeInc = 5;
+	$timeInc = 1;
 	$timeLimit = 600; // 10 minutes
 	set_time_limit($timeLimit + 1);
 	$pathArray = [];
