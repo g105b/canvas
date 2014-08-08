@@ -19,7 +19,7 @@ main {
 }
 canvas {
 	position: relative;
-	display: block;
+	display: none;
 	margin: 0 auto;
 	left: -840px;
 	top: -525px;
@@ -28,6 +28,9 @@ canvas {
 	outline: 1px solid rgba(0,0,0,0.1);
 	background: white;
 	cursor: crosshair;
+}
+canvas.loaded {
+	display: block;
 }
 
 main:active ~ label {
@@ -72,6 +75,7 @@ form {
 	right: 0;
 	background: #fff;
 	z-index: 2;
+	box-shadow: 0 0 16px rgba(0,0,0,0.2);
 }
 form label.toggle i {
 	color: rgba(0,0,0,0.8);
